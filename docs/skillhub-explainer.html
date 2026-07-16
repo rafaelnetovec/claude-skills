@@ -1,0 +1,490 @@
+<title>SkillHub — Como funciona</title>
+<style>
+  :root {
+    --bg: #F6F7F9;
+    --surface: #FFFFFF;
+    --surface-2: #EDF1F4;
+    --ink: #16212B;
+    --muted: #5B6773;
+    --border: #DBE1E7;
+    --teal: #0E8C86;
+    --teal-strong: #0B6B66;
+    --teal-wash: #E2F1F0;
+    --amber: #B76F17;
+    --amber-wash: #F6ECDC;
+    --good: #2E8B57;
+    --term-bg: #10202B;
+    --term-ink: #DCE7EC;
+    --term-muted: #7C93A0;
+    --term-border: #23394A;
+
+    --font-display: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Code", "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+
+    --maxw: 1080px;
+    --radius: 14px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0C1319;
+      --surface: #131E28;
+      --surface-2: #1A2731;
+      --ink: #E7ECF1;
+      --muted: #93A1AD;
+      --border: #253340;
+      --teal: #35B4AD;
+      --teal-strong: #7FD6D0;
+      --teal-wash: #142B2C;
+      --amber: #E0A24B;
+      --amber-wash: #2B2115;
+      --good: #5FBE86;
+      --term-bg: #0A141B;
+      --term-ink: #DCE7EC;
+      --term-muted: #7C93A0;
+      --term-border: #1E3243;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #F6F7F9; --surface: #FFFFFF; --surface-2: #EDF1F4; --ink: #16212B;
+    --muted: #5B6773; --border: #DBE1E7; --teal: #0E8C86; --teal-strong: #0B6B66;
+    --teal-wash: #E2F1F0; --amber: #B76F17; --amber-wash: #F6ECDC; --good: #2E8B57;
+    --term-bg: #10202B; --term-ink: #DCE7EC; --term-muted: #7C93A0; --term-border: #23394A;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0C1319; --surface: #131E28; --surface-2: #1A2731; --ink: #E7ECF1;
+    --muted: #93A1AD; --border: #253340; --teal: #35B4AD; --teal-strong: #7FD6D0;
+    --teal-wash: #142B2C; --amber: #E0A24B; --amber-wash: #2B2115; --good: #5FBE86;
+    --term-bg: #0A141B; --term-ink: #DCE7EC; --term-muted: #7C93A0; --term-border: #1E3243;
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(20px, 5vw, 56px) clamp(16px, 5vw, 40px) 64px;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-strong);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px; height: 2px;
+    background: var(--teal);
+    display: inline-block;
+  }
+
+  h1.wordmark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.02;
+    margin: 18px 0 0;
+    text-wrap: balance;
+  }
+  h1.wordmark .hub { color: var(--teal); }
+
+  .lede {
+    font-size: clamp(17px, 2.2vw, 21px);
+    color: var(--muted);
+    max-width: 60ch;
+    margin: 16px 0 0;
+  }
+
+  section { margin-top: clamp(44px, 7vw, 76px); }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(22px, 3.4vw, 30px);
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  .section-sub { color: var(--muted); margin: 0 0 24px; max-width: 62ch; }
+
+  /* Thesis card */
+  .thesis {
+    margin-top: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--teal);
+    border-radius: var(--radius);
+    padding: clamp(20px, 3vw, 30px);
+  }
+  .thesis p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(19px, 2.6vw, 26px);
+    letter-spacing: -0.015em;
+    line-height: 1.35;
+    text-wrap: balance;
+  }
+  .thesis .accent { color: var(--teal); }
+
+  /* Benefit band */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+  .card .k {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal-strong);
+  }
+  .card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    margin: 10px 0 6px;
+  }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* Roles */
+  .roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .role {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .role .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+  .role.author .tag { background: var(--teal-wash); color: var(--teal-strong); border: 1px solid var(--teal); }
+  .role.consumer .tag { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
+  .role h3 {
+    font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em;
+    font-size: 22px; margin: 14px 0 2px;
+  }
+  .role .who { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+  .role ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .role li { position: relative; padding-left: 24px; font-size: 15px; }
+  .role li::before {
+    content: ""; position: absolute; left: 0; top: 9px;
+    width: 9px; height: 9px; border-radius: 2px; background: var(--teal);
+  }
+  .role.consumer li::before { background: var(--muted); }
+
+  /* Pipeline */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+  .stage {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 18px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .stage .num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--teal-strong);
+    letter-spacing: 0.05em;
+  }
+  .stage h3 {
+    font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em;
+    font-size: 18px; margin: 0;
+  }
+  .stage p { margin: 0; font-size: 14px; color: var(--muted); }
+  .stage .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .chip.ver { background: var(--amber-wash); border-color: var(--amber); color: var(--amber); }
+  .stage::after {
+    content: "→";
+    position: absolute;
+    right: -11px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 20px;
+    z-index: 2;
+  }
+  .stage:last-child::after { content: none; }
+
+  .pipeline-note {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--teal-wash);
+    border: 1px solid var(--teal);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+  .pipeline-note strong { color: var(--teal-strong); }
+  .pipeline-note .mark { font-family: var(--font-mono); color: var(--teal-strong); font-weight: 700; }
+
+  @media (max-width: 720px) {
+    .pipeline { grid-template-columns: 1fr; }
+    .stage::after {
+      content: "↓";
+      right: 50%; top: auto; bottom: -22px;
+      transform: translateX(50%);
+    }
+    .stage:last-child::after { content: none; }
+  }
+
+  /* Technical terminal panel */
+  .terminal {
+    background: var(--term-bg);
+    border: 1px solid var(--term-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    color: var(--term-ink);
+  }
+  .terminal .bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--term-border);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--term-muted);
+  }
+  .terminal .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .terminal .dot.r { background: #E5695B; }
+  .terminal .dot.y { background: #E0A24B; }
+  .terminal .dot.g { background: #5FBE86; }
+  .terminal .bar .path { margin-left: 6px; }
+
+  .terminal .body { padding: clamp(18px, 3vw, 26px); }
+
+  .pieces { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .piece { display: flex; flex-direction: column; gap: 4px; }
+  .piece .name {
+    font-family: var(--font-mono); font-size: 14px; color: var(--teal-strong);
+    font-weight: 600;
+  }
+  :root[data-theme="dark"] .piece .name,
+  .piece .name { color: #6FD3CC; }
+  .piece .desc { font-size: 13.5px; color: var(--term-muted); line-height: 1.5; }
+
+  .cmd-title {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--term-muted);
+    margin: 26px 0 12px;
+  }
+  .cmds { display: flex; flex-direction: column; gap: 2px; font-family: var(--font-mono); font-size: 13.5px; }
+  .cmdrow { display: grid; grid-template-columns: minmax(150px, 260px) 1fr; gap: 14px; padding: 8px 0; border-top: 1px solid var(--term-border); }
+  .cmdrow:first-child { border-top: none; }
+  .cmdrow .c { color: var(--term-ink); }
+  .cmdrow .c .p { color: var(--term-muted); }
+  .cmdrow .d { color: var(--term-muted); font-family: var(--font-body); font-size: 13.5px; }
+  @media (max-width: 640px) {
+    .cmdrow { grid-template-columns: 1fr; gap: 2px; }
+  }
+
+  /* Footer */
+  .foot {
+    margin-top: clamp(44px, 7vw, 72px);
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: baseline;
+    justify-content: space-between;
+  }
+  .foot .repo { font-family: var(--font-mono); font-size: 14px; }
+  .foot .repo a { color: var(--teal); text-decoration: none; }
+  .foot .repo a:hover { text-decoration: underline; }
+  .foot .meta { color: var(--muted); font-size: 13px; }
+  a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 3px; }
+</style>
+
+<div class="page">
+  <div class="wrap">
+
+    <header>
+      <span class="eyebrow">VEC · Claude Code</span>
+      <h1 class="wordmark">Skill<span class="hub">Hub</span></h1>
+      <p class="lede">O jeito da VEC criar, versionar e distribuir as skills do Claude — sem copiar arquivo à mão, sem ninguém ficar em versão diferente.</p>
+    </header>
+
+    <section aria-label="A ideia central">
+      <div class="thesis">
+        <p>As skills deixaram de ser prompts soltos no computador de cada um. Agora existe <span class="accent">um repositório único</span> como fonte da verdade: um desenvolvedor publica com um comando, e a skill chega <span class="accent">automaticamente</span> no Claude de todo mundo — validada e versionada.</p>
+      </div>
+    </section>
+
+    <section aria-label="Benefícios">
+      <h2 class="section-title">Por que isso importa</h2>
+      <p class="section-sub">O que muda na prática, para quem cria skills e para quem só usa.</p>
+      <div class="cards">
+        <div class="card">
+          <span class="k">Sempre atual</span>
+          <h3>Igual a um app do celular</h3>
+          <p>As skills se atualizam sozinhas quando o Claude abre. Ninguém instala nem baixa nada manualmente.</p>
+        </div>
+        <div class="card">
+          <span class="k">Qualidade</span>
+          <h3>Nada entra quebrado</h3>
+          <p>Toda skill é validada automaticamente antes de chegar ao time. Cada versão tem histórico e um responsável.</p>
+        </div>
+        <div class="card">
+          <span class="k">Sem fricção</span>
+          <h3>Um comando publica</h3>
+          <p>Quem cria não mexe em pastas nem em Git. A máquina cuida de validar, versionar e distribuir.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Os dois papéis">
+      <h2 class="section-title">São só dois tipos de pessoa</h2>
+      <p class="section-sub">A maior parte da empresa é <em>consumidor</em> — e para essas pessoas não há trabalho nenhum.</p>
+      <div class="roles">
+        <div class="role author">
+          <span class="tag">poucos</span>
+          <h3>Autor de skill</h3>
+          <p class="who">Quem cria e mantém skills.</p>
+          <ul>
+            <li>Escreve a skill e publica pela CLI <code style="font-family:var(--font-mono)">skill</code>.</li>
+            <li>Define versão, dono e status (rascunho → produção).</li>
+            <li>Precisa só do básico de Git — a ferramenta faz o resto.</li>
+          </ul>
+        </div>
+        <div class="role consumer">
+          <span class="tag">o time todo</span>
+          <h3>Consumidor</h3>
+          <p class="who">Quem usa as skills no dia a dia.</p>
+          <ul>
+            <li>Não faz nada: as skills aparecem e se atualizam sozinhas.</li>
+            <li>Cadastra o canal de distribuição uma única vez.</li>
+            <li>Nunca precisa saber Git nem versões.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="O ciclo de vida de uma skill">
+      <h2 class="section-title">Como uma skill chega até todo mundo</h2>
+      <p class="section-sub">Do momento em que o autor publica até a skill estar no Claude de cada pessoa — sem passo manual no meio.</p>
+      <div class="pipeline">
+        <div class="stage">
+          <span class="num">01 · autor</span>
+          <h3>Publica</h3>
+          <p>Escreve a skill e roda um comando.</p>
+          <div class="chips">
+            <span class="chip">skill create</span>
+            <span class="chip">skill publish</span>
+          </div>
+        </div>
+        <div class="stage">
+          <span class="num">02 · nuvem</span>
+          <h3>Vai pro GitHub</h3>
+          <p>O código sobe para o repositório central.</p>
+          <div class="chips">
+            <span class="chip">claude-skills</span>
+          </div>
+        </div>
+        <div class="stage">
+          <span class="num">03 · automático</span>
+          <h3>O robô do CI age</h3>
+          <p>Valida, atualiza o catálogo e publica a versão.</p>
+          <div class="chips">
+            <span class="chip">valida</span>
+            <span class="chip ver">release v1.1.0</span>
+          </div>
+        </div>
+        <div class="stage">
+          <span class="num">04 · time</span>
+          <h3>Chega no Claude</h3>
+          <p>Cada pessoa recebe a versão nova ao abrir.</p>
+          <div class="chips">
+            <span class="chip">auto-update</span>
+          </div>
+        </div>
+      </div>
+      <div class="pipeline-note">
+        <span class="mark">↳</span>
+        <div>O ponto que impressiona: entre <strong>“publiquei”</strong> e <strong>“todo mundo tem”</strong>, nenhuma pessoa toca em nada. O GitHub valida, versiona e distribui.</div>
+      </div>
+    </section>
+
+    <section aria-label="Como funciona por dentro (para desenvolvedores)">
+      <h2 class="section-title">Por dentro — para desenvolvedores</h2>
+      <p class="section-sub">As peças da engrenagem e a CLI que o autor usa. Pense nela como o <code style="font-family:var(--font-mono)">npm</code>, só que para skills.</p>
+
+      <div class="terminal">
+        <div class="bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="path">~/claude-skills — skillhub</span>
+        </div>
+        <div class="body">
+          <div class="pieces">
+            <div class="piece"><span class="name">skills/&lt;nome&gt;/</span><span class="desc">Fonte da verdade. Cada skill tem SKILL.md, skill.yaml, CHANGELOG.md e tests/.</span></div>
+            <div class="piece"><span class="name">skill.yaml</span><span class="desc">A etiqueta da skill: nome, versão (semver), dono e status. É o que dá controle de qualidade.</span></div>
+            <div class="piece"><span class="name">registry.json</span><span class="desc">O catálogo com todas as skills e versões. Gerado automaticamente.</span></div>
+            <div class="piece"><span class="name">CLI · skill</span><span class="desc">O atalho do autor: criar, validar, versionar e publicar sem mexer em Git.</span></div>
+            <div class="piece"><span class="name">GitHub Actions</span><span class="desc">O “funcionário robô”: valida no PR, sincroniza o catálogo e cria release por skill.</span></div>
+            <div class="piece"><span class="name">Marketplace nativo</span><span class="desc">O canal de distribuição do Claude Code. Cada pessoa cadastra uma vez; o resto é pull automático.</span></div>
+          </div>
+
+          <p class="cmd-title">A CLI em um relance</p>
+          <div class="cmds">
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> create &lt;nome&gt;</span><span class="d">Cria o esqueleto de uma skill nova.</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> validate</span><span class="d">Confere estrutura e metadados (uma ou todas).</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> list</span><span class="d">Lista as skills com versão, dono e status.</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> bump &lt;nome&gt; minor</span><span class="d">Sobe a versão (1.0.0 → 1.1.0) e registra no CHANGELOG.</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> publish &lt;nome&gt;</span><span class="d">Valida → catálogo → commit/push → tag + release.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span class="repo">github.com/<a href="https://github.com/rafaelnetovec/claude-skills">rafaelnetovec/claude-skills</a></span>
+      <span class="meta">SkillHub · gerenciador de skills do Claude Code da VEC</span>
+    </footer>
+
+  </div>
+</div>
