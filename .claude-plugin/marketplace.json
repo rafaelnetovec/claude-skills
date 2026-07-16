@@ -6,7 +6,8 @@
   "plugins": [
     {
       "name": "vec-skills",
-      "source": "./plugins/vec-skills"
+      "source": "./plugins/vec-skills",
+      "version": "1.0.30100"
     }
   ]
 }

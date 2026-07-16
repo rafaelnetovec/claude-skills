@@ -257,39 +257,64 @@ def _plugin_skills_dir(root: Path) -> Path:
     return root / "plugins" / PLUGIN_NAME / "skills"
 
 
+def compute_plugin_version(root: Path) -> str:
+    """Versão do plugin derivada das skills, monotônica sob adição/bump.
+
+    O app desktop do Claude usa o campo `version` do plugin.json para decidir se
+    há atualização. Sem uma versão que CRESCE a cada mudança, o botão "Atualizar"
+    nunca é habilitado. Somamos um score de cada skill (major*10000+minor*100+patch)
+    de modo que adicionar uma skill nova ou versionar uma existente sempre aumenta
+    o total — e portanto a versão do plugin.
+    """
+    total = 0
+    for name in list_skill_names(root):
+        try:
+            meta = load_skill_meta(root, name)
+        except Exception:  # noqa: BLE001
+            continue
+        if SEMVER_RE.match(meta.version):
+            major, minor, patch = (int(x) for x in meta.version.split("."))
+            total += major * 10000 + minor * 100 + patch
+    return f"1.0.{total}"
+
+
 def ensure_plugin_manifests(root: Path) -> None:
-    """Garante marketplace.json e plugin.json (sem campo version, para auto-update por SHA)."""
+    """Grava marketplace.json e plugin.json (este com `version` para o app desktop detectar update)."""
+    version = compute_plugin_version(root)
+
     mp = root / ".claude-plugin" / "marketplace.json"
     mp.parent.mkdir(parents=True, exist_ok=True)
-    if not mp.is_file():
-        mp.write_text(
-            json.dumps(
-                {
-                    "name": MARKETPLACE_NAME,
-                    "owner": {"name": "VEC"},
-                    "plugins": [{"name": PLUGIN_NAME, "source": f"./plugins/{PLUGIN_NAME}"}],
-                },
-                indent=2,
-                ensure_ascii=False,
-            )
-            + "\n",
-            encoding="utf-8",
+    mp.write_text(
+        json.dumps(
+            {
+                "name": MARKETPLACE_NAME,
+                "owner": {"name": "VEC"},
+                "plugins": [
+                    {"name": PLUGIN_NAME, "source": f"./plugins/{PLUGIN_NAME}", "version": version}
+                ],
+            },
+            indent=2,
+            ensure_ascii=False,
         )
+        + "\n",
+        encoding="utf-8",
+    )
+
     pj = root / "plugins" / PLUGIN_NAME / ".claude-plugin" / "plugin.json"
     pj.parent.mkdir(parents=True, exist_ok=True)
-    if not pj.is_file():
-        pj.write_text(
-            json.dumps(
-                {
-                    "name": PLUGIN_NAME,
-                    "description": "Skills compartilhadas da VEC (gerado pelo SkillHub).",
-                },
-                indent=2,
-                ensure_ascii=False,
-            )
-            + "\n",
-            encoding="utf-8",
+    pj.write_text(
+        json.dumps(
+            {
+                "name": PLUGIN_NAME,
+                "description": "Skills compartilhadas da VEC (gerado pelo SkillHub).",
+                "version": version,
+            },
+            indent=2,
+            ensure_ascii=False,
         )
+        + "\n",
+        encoding="utf-8",
+    )
 
 
 def build_plugin(root: Path) -> Path:
