@@ -55,6 +55,12 @@ python -m skillhub.cli list
 
 ## Parte 2 — Criar e publicar uma skill
 
+**Jeito mais fácil — só pedir ao Claude.** Com o Claude Code aberto na pasta do repo,
+descreva a skill em português (ex.: *"crie uma skill que revisa notas de reunião e
+publique"*). O Claude roda todo o fluxo por você — create, validate, bump, publish —
+seguindo o `CLAUDE.md` do repo. Foi assim que este projeto foi construído. Os comandos
+abaixo são o equivalente manual, caso prefira rodar você mesmo:
+
 ```powershell
 # 1. Criar o esqueleto (SKILL.md, skill.yaml, CHANGELOG.md, tests/)
 skill create minha-skill --owner growth --description "O que a skill faz."

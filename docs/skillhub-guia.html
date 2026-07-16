@@ -78,6 +78,7 @@
   .callout { display: flex; gap: 12px; align-items: flex-start; border-radius: var(--radius);
     padding: 15px 18px; font-size: 14.5px; margin-top: 16px; }
   .callout.warn { background: var(--warn-wash); border: 1px solid var(--warn-border); color: var(--warn-ink); }
+  .callout.info { background: var(--teal-wash); border: 1px solid var(--teal); color: var(--teal-strong); }
   .callout .ic { font-family: var(--font-mono); font-weight: 700; }
 
   .terminal { background: var(--term-bg); border: 1px solid var(--term-border); border-radius: var(--radius);
@@ -188,6 +189,10 @@
       </div>
 
       <p class="band">Create and publish a skill</p>
+      <div class="callout info">
+        <span class="ic">✦</span>
+        <div><strong>Easiest way — just ask Claude.</strong> With Claude Code open in the repo folder, describe the skill in plain English (e.g. “create a skill that reviews meeting notes and publish it”). Claude runs the whole flow for you — create, validate, bump, publish — following the repo's <span class="inline-code">CLAUDE.md</span>. The commands below are the manual equivalent.</div>
+      </div>
       <div class="terminal">
         <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>PowerShell</span></div>
         <div class="body"><pre><span class="cm"># 1. scaffold a new skill</span>
