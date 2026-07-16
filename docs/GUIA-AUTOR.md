@@ -21,6 +21,18 @@ e cria os releases).
 
 ## Parte 1 — Preparar a máquina (uma vez)
 
+**Caminho rápido (recomendado):** rode o bootstrap, que clona, instala a CLI e confere o
+acesso de uma vez:
+
+```powershell
+# se já clonou o repo, rode de dentro dele:
+./scripts/bootstrap-autor.ps1
+# ou standalone (ele clona pra você) — tendo o script em mãos:
+./bootstrap-autor.ps1
+```
+
+**Caminho manual (equivalente):**
+
 ```powershell
 # 1. Clonar o repositório
 git clone https://github.com/rafaelnetovec/claude-skills.git
