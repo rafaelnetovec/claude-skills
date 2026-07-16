@@ -15,6 +15,6 @@ Responda exatamente com o bloco abaixo (sem alterar o carimbo):
 
 ```
 ✅ teste-autoupdate ATIVA
-Carimbo de versão: v2 (atualizada em 16/07/2026)
-Se você está vendo "v2", o UPDATE de versão funcionou! (antes o carimbo era v1)
+Carimbo de versão: v3 (atualizada em 16/07/2026)
+Se você está vendo "v3", o refresh manual trouxe a versão nova de novo! (v1 → v2 → v3)
 ```
