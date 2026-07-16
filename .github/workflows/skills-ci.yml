@@ -62,11 +62,21 @@ jobs:
             name=$(basename "$dir")
             version=$(python -c "import yaml,sys; print(yaml.safe_load(open('$dir/skill.yaml'))['version'])")
             tag="${name}-v${version}"
+
+            # 1) Tag: cria só se ainda não existir (local ou empurrada pelo publish).
             if git rev-parse "$tag" >/dev/null 2>&1; then
-              echo "Tag $tag já existe — pulando."
+              echo "Tag $tag já existe."
             else
               git tag "$tag"
               git push origin "$tag"
+              echo "Tag $tag criada."
+            fi
+
+            # 2) Release: independente da tag — cria só se ainda não houver release.
+            #    (assim um 'skill publish' que só empurrou a tag não impede o release)
+            if gh release view "$tag" >/dev/null 2>&1; then
+              echo "Release $tag já existe — pulando."
+            else
               gh release create "$tag" -t "$tag" -n "$name v$version"
               echo "Release $tag criado."
             fi
