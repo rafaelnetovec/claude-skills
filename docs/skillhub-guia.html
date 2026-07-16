@@ -174,15 +174,17 @@
       <p class="band">Set up your machine · once</p>
       <div class="terminal">
         <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>PowerShell</span></div>
-        <div class="body"><pre><span class="cm"># clone the repository</span>
+        <div class="body"><pre><span class="cm"># 1. clone the repo (Git opens a browser to sign in the first time)</span>
 <span class="p">git</span> <span class="c">clone</span> https://github.com/rafaelnetovec/claude-skills.git
 <span class="p">cd</span> claude-skills
 
-<span class="cm"># install the SkillHub CLI</span>
-<span class="p">python</span> -m pip install -e .
+<span class="cm"># 2. allow running .ps1 scripts in this window</span>
+<span class="p">Set-ExecutionPolicy</span> -Scope Process -ExecutionPolicy Bypass
 
-<span class="cm"># check (if "skill" isn't found, use: python -m skillhub.cli)</span>
-<span class="p">skill</span> <span class="c">list</span></pre></div>
+<span class="cm"># 3. run the bootstrap — checks git/python, installs the CLI, verifies access</span>
+.\scripts\bootstrap-autor.ps1
+
+<span class="cm"># (manual alternative to step 3: python -m pip install -e .)</span></pre></div>
       </div>
 
       <p class="band">Create and publish a skill</p>
