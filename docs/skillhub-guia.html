@@ -1,4 +1,4 @@
-<title>SkillHub — Guia de uso</title>
+<title>SkillHub — How to use</title>
 <style>
   :root {
     --bg: #F6F7F9; --surface: #FFFFFF; --surface-2: #EDF1F4; --ink: #16212B;
@@ -51,7 +51,6 @@
     font-size: clamp(21px,3vw,28px); margin: 0 0 4px; text-wrap: balance; }
   .sub { color: var(--muted); margin: 0 0 22px; max-width: 62ch; }
 
-  /* Role chooser */
   .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; margin-top: 26px; }
   .role { display: block; text-decoration: none; color: inherit; background: var(--surface);
     border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; transition: border-color .15s, transform .15s; }
@@ -62,7 +61,6 @@
   .role p { margin: 0; color: var(--muted); font-size: 14.5px; }
   .role .arrow { color: var(--teal); font-family: var(--font-mono); font-size: 13px; margin-top: 12px; display: inline-block; }
 
-  /* Steps */
   .steps { display: flex; flex-direction: column; gap: 14px; counter-reset: step; }
   .step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start;
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
@@ -77,13 +75,11 @@
   .band { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
     color: var(--teal-strong); margin: 26px 0 12px; }
 
-  /* Callout */
   .callout { display: flex; gap: 12px; align-items: flex-start; border-radius: var(--radius);
     padding: 15px 18px; font-size: 14.5px; margin-top: 16px; }
   .callout.warn { background: var(--warn-wash); border: 1px solid var(--warn-border); color: var(--warn-ink); }
   .callout .ic { font-family: var(--font-mono); font-weight: 700; }
 
-  /* Terminal */
   .terminal { background: var(--term-bg); border: 1px solid var(--term-border); border-radius: var(--radius);
     overflow: hidden; color: var(--term-ink); margin-top: 14px; }
   .terminal .bar { display: flex; align-items: center; gap: 8px; padding: 11px 16px; border-bottom: 1px solid var(--term-border);
@@ -92,14 +88,15 @@
   .terminal .dot.r { background: #E5695B; } .terminal .dot.y { background: #E0A24B; } .terminal .dot.g { background: #5FBE86; }
   .terminal .body { padding: clamp(16px,3vw,22px); overflow-x: auto; }
   .terminal pre { margin: 0; font-family: var(--font-mono); font-size: 13.5px; line-height: 1.8; white-space: pre; }
-  .terminal .p { color: var(--term-muted); }        /* prompt / comando base */
-  .terminal .c { color: #6FD3CC; }                    /* subcomando */
-  .terminal .cm { color: var(--term-muted); }         /* comentário */
+  .terminal .p { color: var(--term-muted); }
+  .terminal .c { color: #6FD3CC; }
+  .terminal .cm { color: var(--term-muted); }
 
   .foot { margin-top: clamp(44px,7vw,72px); padding-top: 22px; border-top: 1px solid var(--border);
     display: flex; flex-wrap: wrap; gap: 12px 32px; align-items: baseline; justify-content: space-between; }
   .foot .repo { font-family: var(--font-mono); font-size: 14px; }
   .foot .repo a { color: var(--teal); text-decoration: none; }
+  .foot .repo a:hover { text-decoration: underline; }
   .foot .meta { color: var(--muted); font-size: 13px; }
   a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 3px; }
 </style>
@@ -108,113 +105,113 @@
   <div class="wrap">
 
     <header>
-      <span class="eyebrow">VEC · Claude · Guia de uso</span>
-      <h1>Skill<span class="hub">Hub</span> — como usar</h1>
-      <p class="lede">Dois caminhos, dependendo do seu papel: <strong>receber</strong> as skills (a maioria) ou <strong>criar e publicar</strong> skills. Escolha o seu abaixo.</p>
+      <span class="eyebrow">VEC · Claude · How to use</span>
+      <h1>Skill<span class="hub">Hub</span> — how to use</h1>
+      <p class="lede">Two paths, depending on your role: <strong>receive</strong> the skills (most people) or <strong>create and publish</strong> them. Pick yours below.</p>
     </header>
 
     <div class="roles">
-      <a class="role" href="#consumidor">
-        <span class="tag">o time todo</span>
-        <h3>Sou consumidor</h3>
-        <p>Quero usar as skills no meu Claude e receber as atualizações.</p>
-        <span class="arrow">ver passo a passo ↓</span>
+      <a class="role" href="#consumer">
+        <span class="tag">everyone</span>
+        <h3>I'm a consumer</h3>
+        <p>I want to use the skills in my Claude and get updates.</p>
+        <span class="arrow">see the steps ↓</span>
       </a>
-      <a class="role" href="#autor">
-        <span class="tag">poucos</span>
-        <h3>Sou autor</h3>
-        <p>Quero criar novas skills e publicá-las para o time.</p>
-        <span class="arrow">ver passo a passo ↓</span>
+      <a class="role" href="#author">
+        <span class="tag">a few</span>
+        <h3>I'm an author</h3>
+        <p>I want to create new skills and publish them for the team.</p>
+        <span class="arrow">see the steps ↓</span>
       </a>
     </div>
 
-    <!-- CONSUMIDOR -->
-    <section id="consumidor">
-      <h2>Consumidor — receber e atualizar skills</h2>
-      <p class="sub">No app desktop do Claude. Você faz a instalação uma vez; depois é só atualizar quando avisarem que saiu novidade.</p>
+    <!-- CONSUMER -->
+    <section id="consumer">
+      <h2>Consumer — receive and update skills</h2>
+      <p class="sub">In the Claude desktop app. You install once; after that you just refresh when told a new version shipped.</p>
 
-      <p class="band">Pré-requisito · uma vez</p>
+      <p class="band">Prerequisite · once</p>
       <div class="steps">
         <div class="step">
           <div>
-            <h4>Ter acesso ao repositório</h4>
-            <p>Peça para te adicionarem como colaborador em <span class="inline-code">rafaelnetovec/claude-skills</span> e <strong>aceite o convite</strong> (chega por e-mail do GitHub). Sem isso, o Claude não enxerga o repositório privado.</p>
+            <h4>Get access to the repository</h4>
+            <p>Ask to be added as a collaborator on <span class="inline-code">rafaelnetovec/claude-skills</span> and <strong>accept the invite</strong> (GitHub emails it). Without it, Claude can't see the private repository.</p>
           </div>
         </div>
       </div>
 
-      <p class="band">Instalar · uma vez</p>
+      <p class="band">Install · once</p>
       <div class="steps">
-        <div class="step"><div><h4>Abrir os plugins</h4><p>No Claude (app desktop): <span class="inline-code">Configurações → Plugins</span>.</p></div></div>
-        <div class="step"><div><h4>Adicionar o marketplace</h4><p>Clique em <span class="inline-code">Adicionar</span> (ou no <span class="inline-code">+</span> do Diretório) → adicionar do GitHub → informe <span class="inline-code">rafaelnetovec/claude-skills</span>.</p></div></div>
-        <div class="step"><div><h4>Autorizar o GitHub</h4><p>Se pedir, conecte a conta do GitHub que tem acesso ao repositório.</p></div></div>
-        <div class="step"><div><h4>Instalar “Vec skills”</h4><p>Abra o plugin e instale. As skills aparecem como <span class="inline-code">/exemplo-vec</span>, <span class="inline-code">/revisor-pt</span>, etc.</p></div></div>
+        <div class="step"><div><h4>Open plugins</h4><p>In Claude (desktop app): <span class="inline-code">Settings → Plugins</span>.</p></div></div>
+        <div class="step"><div><h4>Add the marketplace</h4><p>Click <span class="inline-code">Add</span> (or the <span class="inline-code">+</span> in the Directory) → add from GitHub → enter <span class="inline-code">rafaelnetovec/claude-skills</span>.</p></div></div>
+        <div class="step"><div><h4>Authorize GitHub</h4><p>If prompted, connect the GitHub account that has access to the repository.</p></div></div>
+        <div class="step"><div><h4>Install “Vec skills”</h4><p>Open the plugin and install it. Skills appear as <span class="inline-code">/vec-example</span>, <span class="inline-code">/text-reviewer</span>, etc.</p></div></div>
       </div>
 
-      <p class="band">Atualizar · sempre que sair novidade</p>
+      <p class="band">Update · whenever something new ships</p>
       <div class="steps">
-        <div class="step"><div><h4>Abrir o menu do marketplace</h4><p><span class="inline-code">Plugins → Diretório → aba “Pessoal”</span> → no <span class="inline-code">claude-skills</span>, clique no menu <span class="inline-code">…</span>.</p></div></div>
-        <div class="step"><div><h4>Verificar atualizações</h4><p>Clique em <strong>“Verificar atualizações”</strong>. Depois reabra a skill (ou o app). Skills novas e versões novas aparecem.</p></div></div>
+        <div class="step"><div><h4>Open the marketplace menu</h4><p><span class="inline-code">Plugins → Directory → "Personal" tab</span> → on <span class="inline-code">claude-skills</span>, click the <span class="inline-code">…</span> menu.</p></div></div>
+        <div class="step"><div><h4>Check for updates</h4><p>Click <strong>“Check for updates”</strong>. Then reopen the skill (or the app). New skills and new versions appear.</p></div></div>
       </div>
 
       <div class="callout warn">
         <span class="ic">!</span>
-        <div><strong>Pegadinha:</strong> reinstalar o <em>plugin</em> NÃO atualiza (ele usa cache). A atualização só vem pelo <strong>“Verificar atualizações”</strong> no menu do <em>marketplace</em>. O toggle <em>“Sincronizar automaticamente”</em> existe, mas hoje depende de liberação do GitHub App / migração para organização.</div>
+        <div><strong>Gotcha:</strong> reinstalling the <em>plugin</em> does NOT update it (it uses a cache). Updates only arrive via <strong>“Check for updates”</strong> on the <em>marketplace</em> menu. The <em>“Sync automatically”</em> toggle exists, but today it depends on the GitHub App being granted access / moving the repo to an organization.</div>
       </div>
     </section>
 
-    <!-- AUTOR -->
-    <section id="autor">
-      <h2>Autor — criar e publicar skills</h2>
-      <p class="sub">Você usa a CLI <span class="inline-code">skill</span>, que cuida de estrutura, versão e publicação. O GitHub Actions valida e cria os releases sozinho.</p>
+    <!-- AUTHOR -->
+    <section id="author">
+      <h2>Author — create and publish skills</h2>
+      <p class="sub">You use the <span class="inline-code">skill</span> CLI, which handles structure, versioning, and publishing. GitHub Actions validates and creates releases automatically.</p>
 
-      <p class="band">Pré-requisitos · uma vez</p>
+      <p class="band">Prerequisites · once</p>
       <div class="steps">
-        <div class="step"><div><h4>Acesso de ESCRITA ao repo</h4><p>Ser colaborador com permissão <strong>Write</strong> em <span class="inline-code">rafaelnetovec/claude-skills</span> (consumidor precisa só de leitura; autor precisa escrever para publicar).</p></div></div>
-        <div class="step"><div><h4>Ter Git e Python 3.10+</h4><p>Confirme com <span class="inline-code">python --version</span>.</p></div></div>
+        <div class="step"><div><h4>WRITE access to the repo</h4><p>Be a collaborator with <strong>Write</strong> permission on <span class="inline-code">rafaelnetovec/claude-skills</span> (consumers only need read; authors need write to publish).</p></div></div>
+        <div class="step"><div><h4>Git and Python 3.10+</h4><p>Confirm with <span class="inline-code">python --version</span>.</p></div></div>
       </div>
 
-      <p class="band">Preparar a máquina · uma vez</p>
+      <p class="band">Set up your machine · once</p>
       <div class="terminal">
         <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>PowerShell</span></div>
-        <div class="body"><pre><span class="cm"># clonar o repositório</span>
+        <div class="body"><pre><span class="cm"># clone the repository</span>
 <span class="p">git</span> <span class="c">clone</span> https://github.com/rafaelnetovec/claude-skills.git
 <span class="p">cd</span> claude-skills
 
-<span class="cm"># instalar a CLI do SkillHub</span>
+<span class="cm"># install the SkillHub CLI</span>
 <span class="p">python</span> -m pip install -e .
 
-<span class="cm"># conferir (se "skill" não for encontrado, use: python -m skillhub.cli)</span>
+<span class="cm"># check (if "skill" isn't found, use: python -m skillhub.cli)</span>
 <span class="p">skill</span> <span class="c">list</span></pre></div>
       </div>
 
-      <p class="band">Criar e publicar uma skill</p>
+      <p class="band">Create and publish a skill</p>
       <div class="terminal">
         <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>PowerShell</span></div>
-        <div class="body"><pre><span class="cm"># 1. criar o esqueleto</span>
-<span class="p">skill</span> <span class="c">create</span> minha-skill --owner growth --description "O que a skill faz."
+        <div class="body"><pre><span class="cm"># 1. scaffold a new skill</span>
+<span class="p">skill</span> <span class="c">create</span> my-skill --owner growth --description "What the skill does."
 
-<span class="cm"># 2. editar skills/minha-skill/SKILL.md e ajustar o status em skill.yaml</span>
+<span class="cm"># 2. edit skills/my-skill/SKILL.md and set the status in skill.yaml</span>
 
-<span class="cm"># 3. validar</span>
-<span class="p">skill</span> <span class="c">validate</span> minha-skill
+<span class="cm"># 3. validate</span>
+<span class="p">skill</span> <span class="c">validate</span> my-skill
 
-<span class="cm"># 4. subir a versão (patch | minor | major)</span>
-<span class="p">skill</span> <span class="c">bump</span> minha-skill minor
+<span class="cm"># 4. bump the version (patch | minor | major)</span>
+<span class="p">skill</span> <span class="c">bump</span> my-skill minor
 
-<span class="cm"># 5. publicar (o CI cria a tag/release)</span>
-<span class="p">skill</span> <span class="c">publish</span> minha-skill --no-release</pre></div>
+<span class="cm"># 5. publish (CI creates the tag/release)</span>
+<span class="p">skill</span> <span class="c">publish</span> my-skill --no-release</pre></div>
       </div>
 
       <div class="callout warn">
         <span class="ic">!</span>
-        <div><strong>Duas contas GitHub na máquina?</strong> Se o push der 403 (“denied to OUTRA-CONTA”), aponte o remote para a conta certa: <span class="inline-code">git remote set-url origin https://SEU-USUARIO@github.com/rafaelnetovec/claude-skills.git</span>. <strong>Vários autores?</strong> Trabalhe em branch + Pull Request — o CI valida antes do merge.</div>
+        <div><strong>Two GitHub accounts on one machine?</strong> If the push fails with 403 (“denied to OTHER-ACCOUNT”), point the remote at the right user: <span class="inline-code">git remote set-url origin https://YOUR-USER@github.com/rafaelnetovec/claude-skills.git</span>. <strong>Multiple authors?</strong> Work on a branch and open a Pull Request — CI validates before the merge. Or just ask Claude Code (in the repo) to publish for you.</div>
       </div>
     </section>
 
     <footer class="foot">
       <span class="repo">github.com/<a href="https://github.com/rafaelnetovec/claude-skills">rafaelnetovec/claude-skills</a></span>
-      <span class="meta">SkillHub · guia de uso · VEC</span>
+      <span class="meta">SkillHub · how to use · VEC</span>
     </footer>
 
   </div>
