@@ -1,0 +1,12 @@
+{
+  "name": "vec",
+  "owner": {
+    "name": "VEC"
+  },
+  "plugins": [
+    {
+      "name": "vec-skills",
+      "source": "./plugins/vec-skills"
+    }
+  ]
+}

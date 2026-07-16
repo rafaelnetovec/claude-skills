@@ -1,0 +1,19 @@
+{
+  "marketplace": "vec",
+  "plugin": "vec-skills",
+  "generated_by": "skillhub",
+  "skills": [
+    {
+      "name": "exemplo-vec",
+      "version": "1.0.0",
+      "owner": "growth",
+      "status": "production",
+      "description": "Skill de exemplo/health-check do SkillHub.",
+      "tags": [
+        "exemplo",
+        "health-check"
+      ],
+      "path": "skills/exemplo-vec"
+    }
+  ]
+}

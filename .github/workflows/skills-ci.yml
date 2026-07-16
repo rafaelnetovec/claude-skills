@@ -1,0 +1,73 @@
+name: skills-ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar SkillHub
+        run: pip install -e .
+      - name: Validar todas as skills
+        run: skill validate
+
+  sync-and-release:
+    # Roda só em push na main, depois da validação passar.
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar SkillHub
+        run: pip install -e .
+
+      - name: Regenerar registry + plugin
+        run: |
+          skill registry
+          skill build
+
+      - name: Commitar sincronização (se houver mudança)
+        run: |
+          git config user.name "skillhub-bot"
+          git config user.email "skillhub-bot@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore(skillhub): sync registry + plugin [skip ci]"
+            git push
+          else
+            echo "Nada para sincronizar."
+          fi
+
+      - name: Criar tags e releases por skill
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for dir in skills/*/; do
+            name=$(basename "$dir")
+            version=$(python -c "import yaml,sys; print(yaml.safe_load(open('$dir/skill.yaml'))['version'])")
+            tag="${name}-v${version}"
+            if git rev-parse "$tag" >/dev/null 2>&1; then
+              echo "Tag $tag já existe — pulando."
+            else
+              git tag "$tag"
+              git push origin "$tag"
+              gh release create "$tag" -t "$tag" -n "$name v$version"
+              echo "Release $tag criado."
+            fi
+          done
