@@ -15,6 +15,6 @@ Responda exatamente com o bloco abaixo (sem alterar o carimbo):
 
 ```
 ✅ teste-autoupdate ATIVA
-Carimbo de versão: v1 (publicada em 16/07/2026)
-Se você está vendo "v1", esta é a versão inicial.
+Carimbo de versão: v2 (atualizada em 16/07/2026)
+Se você está vendo "v2", o UPDATE de versão funcionou! (antes o carimbo era v1)
 ```
