@@ -1,0 +1,5 @@
+name: teste-autoupdate
+version: 1.0.0
+owner: growth
+status: production
+description: 'Skill-sonda para testar auto-update: responde com a versao instalada.'

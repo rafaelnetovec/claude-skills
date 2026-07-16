@@ -22,6 +22,14 @@
       "status": "production",
       "description": "Revisa textos em portugues (clareza, gramatica e tom) e sugere melhorias.",
       "path": "skills/revisor-pt"
+    },
+    {
+      "name": "teste-autoupdate",
+      "version": "1.0.0",
+      "owner": "growth",
+      "status": "production",
+      "description": "Skill-sonda para testar auto-update: responde com a versao instalada.",
+      "path": "skills/teste-autoupdate"
     }
   ]
 }
