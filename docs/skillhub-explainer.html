@@ -1,16 +1,16 @@
-<title>SkillHub — Como funciona</title>
+<title>SkillHub — How it works</title>
 <style>
   :root {
-    --bg: #F6F7F9;
+    --bg: #F7F8FA;
     --surface: #FFFFFF;
-    --surface-2: #EDF1F4;
-    --ink: #16212B;
-    --muted: #5B6773;
-    --border: #DBE1E7;
+    --surface-2: #EEF1F4;
+    --ink: #16202B;
+    --muted: #5A6673;
+    --border: #DCE1E7;
     --teal: #0E8C86;
     --teal-strong: #0B6B66;
     --teal-wash: #E2F1F0;
-    --amber: #B76F17;
+    --amber: #C77A1E;
     --amber-wash: #F6ECDC;
     --good: #2E8B57;
     --term-bg: #10202B;
@@ -28,13 +28,13 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0C1319;
-      --surface: #131E28;
-      --surface-2: #1A2731;
-      --ink: #E7ECF1;
+      --bg: #0D141B;
+      --surface: #16202B;
+      --surface-2: #1B2833;
+      --ink: #E4E9EE;
       --muted: #93A1AD;
-      --border: #253340;
-      --teal: #35B4AD;
+      --border: #263441;
+      --teal: #33B3AC;
       --teal-strong: #7FD6D0;
       --teal-wash: #142B2C;
       --amber: #E0A24B;
@@ -47,14 +47,14 @@
     }
   }
   :root[data-theme="light"] {
-    --bg: #F6F7F9; --surface: #FFFFFF; --surface-2: #EDF1F4; --ink: #16212B;
-    --muted: #5B6773; --border: #DBE1E7; --teal: #0E8C86; --teal-strong: #0B6B66;
-    --teal-wash: #E2F1F0; --amber: #B76F17; --amber-wash: #F6ECDC; --good: #2E8B57;
+    --bg: #F7F8FA; --surface: #FFFFFF; --surface-2: #EEF1F4; --ink: #16202B;
+    --muted: #5A6673; --border: #DCE1E7; --teal: #0E8C86; --teal-strong: #0B6B66;
+    --teal-wash: #E2F1F0; --amber: #C77A1E; --amber-wash: #F6ECDC; --good: #2E8B57;
     --term-bg: #10202B; --term-ink: #DCE7EC; --term-muted: #7C93A0; --term-border: #23394A;
   }
   :root[data-theme="dark"] {
-    --bg: #0C1319; --surface: #131E28; --surface-2: #1A2731; --ink: #E7ECF1;
-    --muted: #93A1AD; --border: #253340; --teal: #35B4AD; --teal-strong: #7FD6D0;
+    --bg: #0D141B; --surface: #16202B; --surface-2: #1B2833; --ink: #E4E9EE;
+    --muted: #93A1AD; --border: #263441; --teal: #33B3AC; --teal-strong: #7FD6D0;
     --teal-wash: #142B2C; --amber: #E0A24B; --amber-wash: #2B2115; --good: #5FBE86;
     --term-bg: #0A141B; --term-ink: #DCE7EC; --term-muted: #7C93A0; --term-border: #1E3243;
   }
@@ -118,7 +118,6 @@
   }
   .section-sub { color: var(--muted); margin: 0 0 24px; max-width: 62ch; }
 
-  /* Thesis card */
   .thesis {
     margin-top: 28px;
     background: var(--surface);
@@ -138,7 +137,6 @@
   }
   .thesis .accent { color: var(--teal); }
 
-  /* Benefit band */
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -166,7 +164,6 @@
   }
   .card p { margin: 0; color: var(--muted); font-size: 15px; }
 
-  /* Roles */
   .roles {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -201,7 +198,6 @@
   }
   .role.consumer li::before { background: var(--muted); }
 
-  /* Pipeline */
   .pipeline {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -277,7 +273,6 @@
     .stage:last-child::after { content: none; }
   }
 
-  /* Technical terminal panel */
   .terminal {
     background: var(--term-bg);
     border: 1px solid var(--term-border);
@@ -326,7 +321,6 @@
     .cmdrow { grid-template-columns: 1fr; gap: 2px; }
   }
 
-  /* Footer */
   .foot {
     margin-top: clamp(44px, 7vw, 72px);
     padding-top: 24px;
@@ -347,112 +341,112 @@
     <header>
       <span class="eyebrow">VEC · Claude Code</span>
       <h1 class="wordmark">Skill<span class="hub">Hub</span></h1>
-      <p class="lede">O jeito da VEC criar, versionar e distribuir as skills do Claude — sem copiar arquivo à mão, sem ninguém ficar em versão diferente.</p>
+      <p class="lede">How VEC creates, versions, and distributes its Claude skills — no copying files by hand, no one stuck on a different version.</p>
     </header>
 
-    <section aria-label="A ideia central">
+    <section aria-label="The core idea">
       <div class="thesis">
-        <p>As skills deixaram de ser prompts soltos no computador de cada um. Agora existe <span class="accent">um repositório único</span> como fonte da verdade: um desenvolvedor publica com um comando, e a skill chega <span class="accent">automaticamente</span> no Claude de todo mundo — validada e versionada.</p>
+        <p>Skills are no longer loose prompts on each person's computer. There's now <span class="accent">a single repository</span> as the source of truth: a developer publishes with one command, and the skill reaches everyone's Claude <span class="accent">automatically</span> — validated and versioned.</p>
       </div>
     </section>
 
-    <section aria-label="Benefícios">
-      <h2 class="section-title">Por que isso importa</h2>
-      <p class="section-sub">O que muda na prática, para quem cria skills e para quem só usa.</p>
+    <section aria-label="Why it matters">
+      <h2 class="section-title">Why it matters</h2>
+      <p class="section-sub">What changes in practice — for those who create skills and for those who just use them.</p>
       <div class="cards">
         <div class="card">
-          <span class="k">Sempre atual</span>
-          <h3>Igual a um app do celular</h3>
-          <p>As skills se atualizam sozinhas quando o Claude abre. Ninguém instala nem baixa nada manualmente.</p>
+          <span class="k">Always current</span>
+          <h3>Like a phone app</h3>
+          <p>Skills update themselves when Claude opens. No one installs or downloads anything by hand.</p>
         </div>
         <div class="card">
-          <span class="k">Qualidade</span>
-          <h3>Nada entra quebrado</h3>
-          <p>Toda skill é validada automaticamente antes de chegar ao time. Cada versão tem histórico e um responsável.</p>
+          <span class="k">Quality</span>
+          <h3>Nothing ships broken</h3>
+          <p>Every skill is validated automatically before it reaches the team. Each version has history and an owner.</p>
         </div>
         <div class="card">
-          <span class="k">Sem fricção</span>
-          <h3>Um comando publica</h3>
-          <p>Quem cria não mexe em pastas nem em Git. A máquina cuida de validar, versionar e distribuir.</p>
+          <span class="k">No friction</span>
+          <h3>One command publishes</h3>
+          <p>Authors don't touch folders or Git. The machinery validates, versions, and distributes.</p>
         </div>
       </div>
     </section>
 
-    <section aria-label="Os dois papéis">
-      <h2 class="section-title">São só dois tipos de pessoa</h2>
-      <p class="section-sub">A maior parte da empresa é <em>consumidor</em> — e para essas pessoas não há trabalho nenhum.</p>
+    <section aria-label="The two roles">
+      <h2 class="section-title">There are only two kinds of people</h2>
+      <p class="section-sub">Most of the company is a <em>consumer</em> — and for them there's no work at all.</p>
       <div class="roles">
         <div class="role author">
-          <span class="tag">poucos</span>
-          <h3>Autor de skill</h3>
-          <p class="who">Quem cria e mantém skills.</p>
+          <span class="tag">a few</span>
+          <h3>Skill author</h3>
+          <p class="who">Those who create and maintain skills.</p>
           <ul>
-            <li>Escreve a skill e publica pela CLI <code style="font-family:var(--font-mono)">skill</code>.</li>
-            <li>Define versão, dono e status (rascunho → produção).</li>
-            <li>Precisa só do básico de Git — a ferramenta faz o resto.</li>
+            <li>Writes the skill and publishes it via the <code style="font-family:var(--font-mono)">skill</code> CLI.</li>
+            <li>Sets version, owner, and status (draft → production).</li>
+            <li>Needs only basic Git — the tooling does the rest.</li>
           </ul>
         </div>
         <div class="role consumer">
-          <span class="tag">o time todo</span>
-          <h3>Consumidor</h3>
-          <p class="who">Quem usa as skills no dia a dia.</p>
+          <span class="tag">everyone</span>
+          <h3>Consumer</h3>
+          <p class="who">Those who use the skills day to day.</p>
           <ul>
-            <li>Não faz nada: as skills aparecem e se atualizam sozinhas.</li>
-            <li>Cadastra o canal de distribuição uma única vez.</li>
-            <li>Nunca precisa saber Git nem versões.</li>
+            <li>Does nothing: skills appear and update on their own.</li>
+            <li>Subscribes to the distribution channel once.</li>
+            <li>Never needs to know Git or versions.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section aria-label="O ciclo de vida de uma skill">
-      <h2 class="section-title">Como uma skill chega até todo mundo</h2>
-      <p class="section-sub">Do momento em que o autor publica até a skill estar no Claude de cada pessoa — sem passo manual no meio.</p>
+    <section aria-label="A skill's lifecycle">
+      <h2 class="section-title">How a skill reaches everyone</h2>
+      <p class="section-sub">From the moment the author publishes to the skill being in each person's Claude — with no manual step in between.</p>
       <div class="pipeline">
         <div class="stage">
-          <span class="num">01 · autor</span>
-          <h3>Publica</h3>
-          <p>Escreve a skill e roda um comando.</p>
+          <span class="num">01 · author</span>
+          <h3>Publishes</h3>
+          <p>Writes the skill and runs one command.</p>
           <div class="chips">
             <span class="chip">skill create</span>
             <span class="chip">skill publish</span>
           </div>
         </div>
         <div class="stage">
-          <span class="num">02 · nuvem</span>
-          <h3>Vai pro GitHub</h3>
-          <p>O código sobe para o repositório central.</p>
+          <span class="num">02 · cloud</span>
+          <h3>Goes to GitHub</h3>
+          <p>The code is pushed to the central repository.</p>
           <div class="chips">
             <span class="chip">claude-skills</span>
           </div>
         </div>
         <div class="stage">
-          <span class="num">03 · automático</span>
-          <h3>O robô do CI age</h3>
-          <p>Valida, atualiza o catálogo e publica a versão.</p>
+          <span class="num">03 · automatic</span>
+          <h3>CI does the work</h3>
+          <p>Validates, updates the catalog, and publishes the version.</p>
           <div class="chips">
-            <span class="chip">valida</span>
+            <span class="chip">validate</span>
             <span class="chip ver">release v1.1.0</span>
           </div>
         </div>
         <div class="stage">
-          <span class="num">04 · time</span>
-          <h3>Chega no Claude</h3>
-          <p>Cada pessoa recebe a versão nova ao abrir.</p>
+          <span class="num">04 · team</span>
+          <h3>Reaches Claude</h3>
+          <p>Each person gets the new version.</p>
           <div class="chips">
-            <span class="chip">auto-update</span>
+            <span class="chip">update</span>
           </div>
         </div>
       </div>
       <div class="pipeline-note">
         <span class="mark">↳</span>
-        <div>O ponto que impressiona: entre <strong>“publiquei”</strong> e <strong>“todo mundo tem”</strong>, nenhuma pessoa toca em nada. O GitHub valida, versiona e distribui.</div>
+        <div>The striking part: between <strong>“I published”</strong> and <strong>“everyone has it,”</strong> no person touches anything. GitHub validates, versions, and distributes.</div>
       </div>
     </section>
 
-    <section aria-label="Como funciona por dentro (para desenvolvedores)">
-      <h2 class="section-title">Por dentro — para desenvolvedores</h2>
-      <p class="section-sub">As peças da engrenagem e a CLI que o autor usa. Pense nela como o <code style="font-family:var(--font-mono)">npm</code>, só que para skills.</p>
+    <section aria-label="How it works under the hood (for developers)">
+      <h2 class="section-title">Under the hood — for developers</h2>
+      <p class="section-sub">The moving parts and the CLI the author uses. Think of it as <code style="font-family:var(--font-mono)">npm</code>, but for skills.</p>
 
       <div class="terminal">
         <div class="bar">
@@ -461,21 +455,21 @@
         </div>
         <div class="body">
           <div class="pieces">
-            <div class="piece"><span class="name">skills/&lt;nome&gt;/</span><span class="desc">Fonte da verdade. Cada skill tem SKILL.md, skill.yaml, CHANGELOG.md e tests/.</span></div>
-            <div class="piece"><span class="name">skill.yaml</span><span class="desc">A etiqueta da skill: nome, versão (semver), dono e status. É o que dá controle de qualidade.</span></div>
-            <div class="piece"><span class="name">registry.json</span><span class="desc">O catálogo com todas as skills e versões. Gerado automaticamente.</span></div>
-            <div class="piece"><span class="name">CLI · skill</span><span class="desc">O atalho do autor: criar, validar, versionar e publicar sem mexer em Git.</span></div>
-            <div class="piece"><span class="name">GitHub Actions</span><span class="desc">O “funcionário robô”: valida no PR, sincroniza o catálogo e cria release por skill.</span></div>
-            <div class="piece"><span class="name">Marketplace nativo</span><span class="desc">O canal de distribuição do Claude Code. Cada pessoa cadastra uma vez; o resto é pull automático.</span></div>
+            <div class="piece"><span class="name">skills/&lt;name&gt;/</span><span class="desc">Source of truth. Each skill has SKILL.md, skill.yaml, CHANGELOG.md, and tests/.</span></div>
+            <div class="piece"><span class="name">skill.yaml</span><span class="desc">The skill's label: name, version (semver), owner, and status. This is what gives quality control.</span></div>
+            <div class="piece"><span class="name">registry.json</span><span class="desc">The catalog of every skill and version. Generated automatically.</span></div>
+            <div class="piece"><span class="name">CLI · skill</span><span class="desc">The author's shortcut: create, validate, version, and publish without touching Git.</span></div>
+            <div class="piece"><span class="name">GitHub Actions</span><span class="desc">The “robot worker”: validates on PR, syncs the catalog, and creates a release per skill.</span></div>
+            <div class="piece"><span class="name">Native marketplace</span><span class="desc">Claude's distribution channel. Each person subscribes once; the rest is automatic pull.</span></div>
           </div>
 
-          <p class="cmd-title">A CLI em um relance</p>
+          <p class="cmd-title">The CLI at a glance</p>
           <div class="cmds">
-            <div class="cmdrow"><span class="c"><span class="p">skill</span> create &lt;nome&gt;</span><span class="d">Cria o esqueleto de uma skill nova.</span></div>
-            <div class="cmdrow"><span class="c"><span class="p">skill</span> validate</span><span class="d">Confere estrutura e metadados (uma ou todas).</span></div>
-            <div class="cmdrow"><span class="c"><span class="p">skill</span> list</span><span class="d">Lista as skills com versão, dono e status.</span></div>
-            <div class="cmdrow"><span class="c"><span class="p">skill</span> bump &lt;nome&gt; minor</span><span class="d">Sobe a versão (1.0.0 → 1.1.0) e registra no CHANGELOG.</span></div>
-            <div class="cmdrow"><span class="c"><span class="p">skill</span> publish &lt;nome&gt;</span><span class="d">Valida → catálogo → commit/push → tag + release.</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> create &lt;name&gt;</span><span class="d">Scaffold a new skill.</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> validate</span><span class="d">Check structure and metadata (one or all).</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> list</span><span class="d">List skills with version, owner, and status.</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> bump &lt;name&gt; minor</span><span class="d">Raise the version (1.0.0 → 1.1.0) and record it in the CHANGELOG.</span></div>
+            <div class="cmdrow"><span class="c"><span class="p">skill</span> publish &lt;name&gt;</span><span class="d">Validate → catalog → commit/push → tag + release.</span></div>
           </div>
         </div>
       </div>
@@ -483,7 +477,7 @@
 
     <footer class="foot">
       <span class="repo">github.com/<a href="https://github.com/rafaelnetovec/claude-skills">rafaelnetovec/claude-skills</a></span>
-      <span class="meta">SkillHub · gerenciador de skills do Claude Code da VEC</span>
+      <span class="meta">SkillHub · VEC's Claude skill manager</span>
     </footer>
 
   </div>
