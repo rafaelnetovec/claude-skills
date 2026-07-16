@@ -19,6 +19,13 @@ import yaml
 MARKETPLACE_NAME = "vec"
 PLUGIN_NAME = "vec-skills"
 
+# "Epoch" (major) da versão do plugin. A versão é derivada da soma das skills
+# (ver compute_plugin_version), o que é monotônico enquanto só ADICIONAMOS ou
+# versionamos skills. Se um dia REMOVERMOS/renomearmos skills e a soma cair
+# abaixo da versão já publicada, incremente este epoch para garantir que a nova
+# versão continue MAIOR que a instalada (senão o app não detecta o update).
+PLUGIN_VERSION_EPOCH = 2
+
 VALID_STATUS = {"draft", "beta", "production", "deprecated"}
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 SKILL_NAME_RE = re.compile(r"^[a-z0-9][a-z0-9-]*$")
@@ -275,7 +282,7 @@ def compute_plugin_version(root: Path) -> str:
         if SEMVER_RE.match(meta.version):
             major, minor, patch = (int(x) for x in meta.version.split("."))
             total += major * 10000 + minor * 100 + patch
-    return f"1.0.{total}"
+    return f"{PLUGIN_VERSION_EPOCH}.0.{total}"
 
 
 def ensure_plugin_manifests(root: Path) -> None:

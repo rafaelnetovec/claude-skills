@@ -4,32 +4,28 @@
   "generated_by": "skillhub",
   "skills": [
     {
-      "name": "exemplo-vec",
+      "name": "text-reviewer",
       "version": "1.0.0",
       "owner": "growth",
       "status": "production",
-      "description": "Skill de exemplo/health-check do SkillHub.",
+      "description": "Reviews and improves written text for clarity, grammar, concision, and tone.",
       "tags": [
-        "exemplo",
+        "writing",
+        "review"
+      ],
+      "path": "skills/text-reviewer"
+    },
+    {
+      "name": "vec-example",
+      "version": "1.0.0",
+      "owner": "growth",
+      "status": "production",
+      "description": "Example / health-check skill for the VEC SkillHub.",
+      "tags": [
+        "example",
         "health-check"
       ],
-      "path": "skills/exemplo-vec"
-    },
-    {
-      "name": "revisor-pt",
-      "version": "1.1.0",
-      "owner": "growth",
-      "status": "production",
-      "description": "Revisa textos em portugues (clareza, gramatica e tom) e sugere melhorias.",
-      "path": "skills/revisor-pt"
-    },
-    {
-      "name": "teste-autoupdate",
-      "version": "1.2.0",
-      "owner": "growth",
-      "status": "production",
-      "description": "Skill-sonda para testar auto-update: responde com a versao instalada.",
-      "path": "skills/teste-autoupdate"
+      "path": "skills/vec-example"
     }
   ]
 }

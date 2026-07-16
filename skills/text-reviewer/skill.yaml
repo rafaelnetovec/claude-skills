@@ -1,0 +1,8 @@
+name: text-reviewer
+version: 1.0.0
+owner: growth
+status: production
+description: Reviews and improves written text for clarity, grammar, concision, and tone.
+tags:
+- writing
+- review
