@@ -1,0 +1,8 @@
+# Normaliza quebras de linha por tipo de arquivo.
+* text=auto
+
+# Scripts de shell PRECISAM de LF (senão quebram no Mac/Linux: "bad interpreter").
+*.sh text eol=lf
+
+# Scripts PowerShell ficam com CRLF (nativo do Windows).
+*.ps1 text eol=crlf
