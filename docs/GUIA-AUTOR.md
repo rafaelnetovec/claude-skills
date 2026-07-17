@@ -14,42 +14,59 @@ e cria os releases).
 1. **Acesso de ESCRITA** ao repositório `rafaelnetovec/claude-skills`
    (colaborador com permissão *Write*, ou membro da org quando o repo migrar).
    > Consumidor precisa só de leitura; autor precisa de escrita para dar `push`.
-2. **Git** instalado.
-3. **Python 3.10+** instalado (`python --version`).
+2. **Git** e **Python 3.10+** instalados. Se a máquina não tiver, instale:
+
+   **Windows** (PowerShell):
+   ```powershell
+   winget install Git.Git
+   winget install Python.Python.3.12
+   ```
+   (ou baixe de git-scm.com e python.org — no instalador do Python, marque **"Add to PATH"**)
+
+   **Mac** (Terminal):
+   ```bash
+   xcode-select --install     # instala o git (Command Line Tools)
+   brew install python         # Python 3.10+  (não tem Homebrew? instale em brew.sh)
+   ```
+
+   **Feche e reabra o terminal** depois de instalar e confirme:
+   - Windows: `git --version` e `python --version`
+   - Mac: `git --version` e `python3 --version`
 
 ---
 
 ## Parte 1 — Preparar a máquina (uma vez)
 
-**Caminho rápido (recomendado):** rode o bootstrap, que clona, instala a CLI e confere o
-acesso de uma vez:
+**Onde eu rodo o `git clone`? Em que pasta?**
+Abra o terminal — ele já começa na sua **pasta pessoal** (`C:\Users\voce` no Windows,
+`/Users/voce` no Mac). Pode clonar ali mesmo: o `git clone` cria uma **subpasta nova**
+chamada `claude-skills` dentro da pasta onde você está. Se preferir outro lugar, dê `cd`
+para lá antes (ex.: `cd Documents`). Não precisa criar a pasta à mão — o clone cria.
 
+Depois de clonar, entre nela com `cd claude-skills`. É essa a pasta onde você abre o
+Claude Code para publicar skills.
+
+### Windows (PowerShell)
 ```powershell
-# se já clonou o repo, rode de dentro dele:
-./scripts/bootstrap-autor.ps1
-# ou standalone (ele clona pra você) — tendo o script em mãos:
-./bootstrap-autor.ps1
-```
-
-**Caminho manual (equivalente):**
-
-```powershell
-# 1. Clonar o repositório
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass   # libera rodar .ps1 nesta janela
 git clone https://github.com/rafaelnetovec/claude-skills.git
 cd claude-skills
-
-# 2. Instalar a CLI do SkillHub (modo editável)
-python -m pip install -e .
+.\scripts\bootstrap-autor.ps1
 ```
 
-Depois disso o comando fica disponível como `skill`. Se o terminal não encontrar
-`skill` (a pasta de Scripts do Python pode não estar no PATH), use a forma equivalente
-`python -m skillhub.cli` no lugar de `skill` em qualquer comando abaixo.
-
-Confirme:
-```powershell
-python -m skillhub.cli list
+### Mac (Terminal)
+```bash
+git clone https://github.com/rafaelnetovec/claude-skills.git
+cd claude-skills
+bash scripts/bootstrap-autor.sh
 ```
+
+O **bootstrap** confere git/python, instala a CLI e testa o acesso ao repo — e avisa
+exatamente o que faltar. (Equivalente manual: `python -m pip install -e .` no Windows,
+`python3 -m pip install -e .` no Mac.)
+
+Se o comando `skill` não for reconhecido depois, use `python -m skillhub.cli` (Windows) ou
+`python3 -m skillhub.cli` (Mac) no lugar de `skill`.
 
 ---
 
