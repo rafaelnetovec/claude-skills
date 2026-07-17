@@ -4,6 +4,18 @@
   "generated_by": "skillhub",
   "skills": [
     {
+      "name": "meeting-summarizer",
+      "version": "1.0.0",
+      "owner": "growth",
+      "status": "production",
+      "description": "Turns raw meeting notes or a transcript into a clean summary with decisions and action items.",
+      "tags": [
+        "productivity",
+        "meetings"
+      ],
+      "path": "skills/meeting-summarizer"
+    },
+    {
       "name": "text-reviewer",
       "version": "1.0.0",
       "owner": "growth",

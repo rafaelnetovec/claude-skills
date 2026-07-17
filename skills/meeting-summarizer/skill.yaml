@@ -1,0 +1,8 @@
+name: meeting-summarizer
+version: 1.0.0
+owner: growth
+status: production
+description: Turns raw meeting notes or a transcript into a clean summary with decisions and action items.
+tags:
+- productivity
+- meetings
