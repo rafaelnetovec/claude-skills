@@ -1,0 +1,8 @@
+name: pt-en-translator
+version: 1.0.0
+owner: growth
+status: production
+description: Translates text between Brazilian Portuguese and English, preserving tone and meaning.
+tags:
+- translation
+- language
