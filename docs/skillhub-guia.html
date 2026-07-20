@@ -178,19 +178,25 @@
         <div><strong>First install Git and Python 3.10+.</strong> Windows: <span class="inline-code">winget install Git.Git</span> and <span class="inline-code">winget install Python.Python.3.12</span>. Mac: <span class="inline-code">xcode-select --install</span> then <span class="inline-code">brew install python</span>. <br>Then open a terminal — <span class="inline-code">git clone</span> creates a <strong>claude-skills</strong> folder inside whatever folder you're in (your home folder by default). That's the folder you open Claude Code in to publish.</div>
       </div>
       <div class="terminal">
-        <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>Windows · PowerShell</span></div>
-        <div class="body"><pre><span class="cm"># allow running .ps1 in this window, clone, then bootstrap</span>
+        <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>Windows · PowerShell (not as Administrator)</span></div>
+        <div class="body"><pre><span class="cm"># allow .ps1 in this window, go to your home folder, clone, bootstrap</span>
 <span class="p">Set-ExecutionPolicy</span> -Scope Process -ExecutionPolicy Bypass
+<span class="p">cd</span> $env:USERPROFILE
 <span class="p">git</span> <span class="c">clone</span> https://github.com/rafaelnetovec/claude-skills.git
 <span class="p">cd</span> claude-skills
 .\scripts\bootstrap-autor.ps1</pre></div>
       </div>
       <div class="terminal">
         <div class="bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>Mac · Terminal</span></div>
-        <div class="body"><pre><span class="cm"># clone, then bootstrap</span>
+        <div class="body"><pre><span class="cm"># go to your home folder, clone, bootstrap</span>
+<span class="p">cd</span> ~
 <span class="p">git</span> <span class="c">clone</span> https://github.com/rafaelnetovec/claude-skills.git
 <span class="p">cd</span> claude-skills
 <span class="p">bash</span> scripts/bootstrap-autor.sh</pre></div>
+      </div>
+      <div class="callout warn">
+        <span class="ic">!</span>
+        <div><strong>Don't open PowerShell “as Administrator.”</strong> It starts in <span class="inline-code">C:\Windows\System32</span>, a protected folder where the clone fails with <em>“could not create work tree dir: Permission denied.”</em> A normal PowerShell + the <span class="inline-code">cd $env:USERPROFILE</span> above avoids it.</div>
       </div>
 
       <p class="band">Create and publish a skill</p>

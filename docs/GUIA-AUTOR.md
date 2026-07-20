@@ -46,9 +46,14 @@ para lá antes (ex.: `cd Documents`). Não precisa criar a pasta à mão — o c
 Depois de clonar, entre nela com `cd claude-skills`. É essa a pasta onde você abre o
 Claude Code para publicar skills.
 
+> ⚠️ **Não abra o PowerShell como Administrador.** Isso o inicia em `C:\WINDOWS\System32`,
+> uma pasta protegida — o clone falha com *"could not create work tree dir: Permission
+> denied"*. Use um PowerShell normal e o `cd` abaixo garante uma pasta com permissão.
+
 ### Windows (PowerShell)
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass   # libera rodar .ps1 nesta janela
+cd $env:USERPROFILE                                          # vai para C:\Users\voce (pasta com permissao)
 git clone https://github.com/rafaelnetovec/claude-skills.git
 cd claude-skills
 .\scripts\bootstrap-autor.ps1
@@ -56,6 +61,7 @@ cd claude-skills
 
 ### Mac (Terminal)
 ```bash
+cd ~                                                         # sua pasta pessoal
 git clone https://github.com/rafaelnetovec/claude-skills.git
 cd claude-skills
 bash scripts/bootstrap-autor.sh
