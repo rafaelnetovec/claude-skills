@@ -16,6 +16,18 @@
       "path": "skills/meeting-summarizer"
     },
     {
+      "name": "pdf-reader",
+      "version": "1.0.0",
+      "owner": "growth",
+      "status": "production",
+      "description": "Reads and extracts text, tables, and metadata from PDF files, and answers questions about their contents.",
+      "tags": [
+        "pdf",
+        "extraction"
+      ],
+      "path": "skills/pdf-reader"
+    },
+    {
       "name": "pt-en-translator",
       "version": "1.0.0",
       "owner": "growth",
