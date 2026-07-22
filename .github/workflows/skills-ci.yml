@@ -54,10 +54,12 @@ jobs:
             echo "Nada para sincronizar."
           fi
 
-      - name: Criar tags e releases por skill
+      - name: Tags, releases e notificação no Slack
         env:
           GH_TOKEN: ${{ github.token }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
+          NOTIFY=""
           for dir in skills/*/; do
             name=$(basename "$dir")
             version=$(python -c "import yaml,sys; print(yaml.safe_load(open('$dir/skill.yaml'))['version'])")
@@ -79,5 +81,17 @@ jobs:
             else
               gh release create "$tag" -t "$tag" -n "$name v$version"
               echo "Release $tag criado."
+              # acumula só o que é release NOVO (= skill de fato atualizada)
+              NOTIFY="${NOTIFY}"$'\n'"• ${name} v${version}"
             fi
           done
+
+          # 3) Notifica o Slack — só se houve release novo E o webhook está configurado.
+          if [ -n "$NOTIFY" ] && [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
+            TEXT=":sparkles: *VEC skills updated*${NOTIFY}"$'\n\n'"Get them in Claude → Plugins → Directory → Personal → ⋯ → *Check for updates* (or wait for auto-sync)."
+            payload=$(TEXT="$TEXT" python -c "import json,os;print(json.dumps({'text':os.environ['TEXT']}))")
+            curl -sS -X POST -H 'Content-type: application/json' --data "$payload" "$SLACK_WEBHOOK_URL" || echo "Falha ao notificar o Slack (não-fatal)."
+            echo "Slack notificado."
+          else
+            echo "Nada novo para notificar (ou SLACK_WEBHOOK_URL não configurado)."
+          fi

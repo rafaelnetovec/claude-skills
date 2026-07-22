@@ -78,6 +78,15 @@ fetches updates on its own.
 
 ---
 
+## Stay notified when skills change
+
+- **Slack:** join the team channel where the SkillHub bot posts updates (e.g. `#vec-skills`).
+  Whenever a skill gets a new version, it posts what changed.
+- **Email:** on the repo, click **Watch → Custom → Releases → Apply**. GitHub will email you
+  whenever a new skill version is released.
+
+---
+
 ## For Claude Code (terminal) users — alternative
 
 Most of the team uses the desktop app (above). People using **Claude Code in the terminal**
