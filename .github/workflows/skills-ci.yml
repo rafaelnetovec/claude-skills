@@ -37,10 +37,11 @@ jobs:
       - name: Instalar SkillHub
         run: pip install -e .
 
-      - name: Regenerar registry + plugin
+      - name: Regenerar registry + plugin + catálogo
         run: |
           skill registry
           skill build
+          skill catalog
 
       - name: Commitar sincronização (se houver mudança)
         run: |

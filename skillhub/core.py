@@ -356,6 +356,110 @@ def build_plugin(root: Path) -> Path:
     return dest_base
 
 
+# --- Catálogo web (gerado do registry) -------------------------------------
+
+CATALOG_TEMPLATE = """<title>SkillHub — Catalog</title>
+<style>
+  :root {
+    --bg:#F6F7F9; --surface:#FFFFFF; --ink:#16212B; --muted:#5B6773; --border:#DBE1E7;
+    --teal:#0E8C86; --teal-strong:#0B6B66; --teal-wash:#E2F1F0; --amber:#B76F17;
+    --amber-wash:#F6ECDC; --green:#2E8B57; --green-wash:#E4F2EA; --red:#B23B3B; --red-wash:#F6E4E4;
+    --grey-wash:#EDF1F4;
+    --fd:ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --fm:ui-monospace,"Cascadia Code","SFMono-Regular",Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#0C1319; --surface:#131E28; --ink:#E7ECF1; --muted:#93A1AD; --border:#253340;
+    --teal:#35B4AD; --teal-strong:#7FD6D0; --teal-wash:#142B2C; --amber:#E0A24B;
+    --amber-wash:#2B2115; --green:#5FBE86; --green-wash:#14271C; --red:#E07A7A; --red-wash:#2B1616;
+    --grey-wash:#1A2731;
+  }}
+  :root[data-theme="light"]{--bg:#F6F7F9;--surface:#FFFFFF;--ink:#16212B;--muted:#5B6773;--border:#DBE1E7;--teal:#0E8C86;--teal-strong:#0B6B66;--teal-wash:#E2F1F0;--amber:#B76F17;--amber-wash:#F6ECDC;--green:#2E8B57;--green-wash:#E4F2EA;--red:#B23B3B;--red-wash:#F6E4E4;--grey-wash:#EDF1F4;}
+  :root[data-theme="dark"]{--bg:#0C1319;--surface:#131E28;--ink:#E7ECF1;--muted:#93A1AD;--border:#253340;--teal:#35B4AD;--teal-strong:#7FD6D0;--teal-wash:#142B2C;--amber:#E0A24B;--amber-wash:#2B2115;--green:#5FBE86;--green-wash:#14271C;--red:#E07A7A;--red-wash:#2B1616;--grey-wash:#1A2731;}
+  *{box-sizing:border-box;}
+  .page{background:var(--bg);color:var(--ink);font-family:var(--fd);line-height:1.6;-webkit-font-smoothing:antialiased;padding:clamp(20px,5vw,56px) clamp(16px,5vw,40px) 64px;}
+  .wrap{max-width:1080px;margin:0 auto;}
+  .eyebrow{font-family:var(--fm);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-strong);display:inline-flex;align-items:center;gap:8px;}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--teal);display:inline-block;}
+  h1{font-family:var(--fd);font-weight:800;letter-spacing:-.03em;font-size:clamp(32px,6vw,52px);margin:16px 0 0;}
+  h1 .hub{color:var(--teal);}
+  .lede{font-family:var(--fm);font-size:13px;color:var(--muted);margin:12px 0 0;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:36px;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px;}
+  .card-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
+  .name{font-family:var(--fm);font-size:17px;font-weight:600;margin:0;color:var(--ink);word-break:break-all;}
+  .ver{font-family:var(--fm);font-size:12px;color:var(--teal-strong);background:var(--teal-wash);border:1px solid var(--teal);border-radius:999px;padding:2px 8px;white-space:nowrap;}
+  .desc{margin:0;font-size:14.5px;color:var(--muted);flex:1;}
+  .meta{display:flex;align-items:center;gap:10px;}
+  .pill{font-family:var(--fm);font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid;}
+  .pill.prod{background:var(--green-wash);color:var(--green);border-color:var(--green);}
+  .pill.beta{background:var(--amber-wash);color:var(--amber);border-color:var(--amber);}
+  .pill.draft{background:var(--grey-wash);color:var(--muted);border-color:var(--border);}
+  .pill.dep{background:var(--red-wash);color:var(--red);border-color:var(--red);}
+  .owner{font-family:var(--fm);font-size:12px;color:var(--muted);}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .tag{font-family:var(--fm);font-size:11px;color:var(--muted);background:var(--grey-wash);border:1px solid var(--border);border-radius:6px;padding:2px 7px;}
+  .empty{color:var(--muted);}
+  .foot{margin-top:48px;padding-top:22px;border-top:1px solid var(--border);font-family:var(--fm);font-size:12px;color:var(--muted);}
+  .foot a{color:var(--teal);text-decoration:none;}
+</style>
+<div class="page"><div class="wrap">
+  <header>
+    <span class="eyebrow">VEC · Claude · SkillHub</span>
+    <h1>Skill<span class="hub">Hub</span> catalog</h1>
+    <p class="lede">__COUNT__ shared skills · plugin __PLUGIN_VERSION__ · auto-generated from the registry</p>
+  </header>
+  <div class="grid">
+__CARDS__
+  </div>
+  <footer class="foot">github.com/<a href="https://github.com/rafaelnetovec/claude-skills">rafaelnetovec/claude-skills</a> · type <code>/&lt;name&gt;</code> in Claude to use a skill</footer>
+</div></div>
+"""
+
+
+def build_catalog(root: Path) -> Path:
+    """Gera docs/catalog.html a partir do registry (determinístico, sem timestamps)."""
+    import html as _html
+
+    reg = build_registry(root)
+    skills = sorted(reg.get("skills", []), key=lambda x: x.get("name", ""))
+    status_cls = {"production": "prod", "beta": "beta", "draft": "draft", "deprecated": "dep"}
+
+    cards = []
+    for s in skills:
+        name = _html.escape(str(s.get("name", "")))
+        version = _html.escape(str(s.get("version", "")))
+        owner = _html.escape(str(s.get("owner", "")))
+        status = str(s.get("status", "draft"))
+        desc = _html.escape(str(s.get("description", "")))
+        tags = "".join(
+            f'<span class="tag">{_html.escape(str(t))}</span>' for t in (s.get("tags") or [])
+        )
+        cls = status_cls.get(status, "draft")
+        cards.append(
+            f'    <article class="card">\n'
+            f'      <div class="card-top"><h2 class="name">/{name}</h2>'
+            f'<span class="ver">v{version}</span></div>\n'
+            f'      <p class="desc">{desc}</p>\n'
+            f'      <div class="meta"><span class="pill {cls}">{_html.escape(status)}</span>'
+            f'<span class="owner">{owner}</span></div>\n'
+            f'      <div class="tags">{tags}</div>\n'
+            f'    </article>'
+        )
+
+    cards_html = "\n".join(cards) if cards else '    <p class="empty">No skills yet.</p>'
+    doc = (
+        CATALOG_TEMPLATE
+        .replace("__COUNT__", str(len(skills)))
+        .replace("__PLUGIN_VERSION__", compute_plugin_version(root))
+        .replace("__CARDS__", cards_html)
+    )
+    out = root / "docs" / "catalog.html"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(doc, encoding="utf-8")
+    return out
+
+
 # --- Git -------------------------------------------------------------------
 
 

@@ -227,6 +227,14 @@ def build():
     typer.secho(f"plugin montado em {dest.relative_to(root)}", fg=typer.colors.GREEN)
 
 
+@app.command()
+def catalog():
+    """Gera o catálogo web (docs/catalog.html) a partir do registry."""
+    root = _root()
+    path = core.build_catalog(root)
+    typer.secho(f"catálogo gerado: {path.relative_to(root)}", fg=typer.colors.GREEN)
+
+
 # --- publish ---------------------------------------------------------------
 
 
@@ -275,16 +283,37 @@ def publish(
             typer.secho(f"[dry-run] git tag {tag} && gh release create {tag}", fg=typer.colors.YELLOW)
         return
 
-    core.write_registry(root)
-    core.build_plugin(root)
-
-    if not core.git_has_changes(root):
-        typer.secho("Nada mudou para commitar.", fg=typer.colors.YELLOW)
-    else:
+    # 1) Commita a FONTE da skill primeiro (para o pull --rebase abaixo poder rodar).
+    if core.git_has_changes(root):
         core.git(root, "add", "-A")
         core.git(root, "commit", "-m", commit_msg)
         typer.secho(f"commit: {commit_msg}", fg=typer.colors.GREEN)
+    else:
+        typer.secho("Nada mudou para commitar.", fg=typer.colors.YELLOW)
 
+    # 2) Sincroniza com o remoto ANTES de regenerar — assim o build inclui as skills
+    #    de outros autores (evita dropar do plugin skills que só existem no remoto).
+    if push:
+        try:
+            core.git(root, "pull", "--rebase")
+            typer.secho("sincronizado com o remoto (git pull --rebase)", fg=typer.colors.CYAN)
+        except core.GitError as exc:
+            typer.secho(
+                f"git pull --rebase falhou — resolva o conflito e rode de novo:\n{exc}",
+                fg=typer.colors.RED,
+            )
+            raise typer.Exit(1)
+
+    # 3) Regenera catálogo/registry/plugin com o conjunto COMPLETO de skills.
+    core.write_registry(root)
+    core.build_plugin(root)
+    core.build_catalog(root)
+    if core.git_has_changes(root):
+        core.git(root, "add", "-A")
+        core.git(root, "commit", "-m", "chore(skillhub): regenera registry/plugin/catalogo")
+        typer.secho("regenerado registry + plugin + catálogo", fg=typer.colors.GREEN)
+
+    # 4) Publica.
     if push:
         core.git(root, "push")
         typer.secho("push feito", fg=typer.colors.GREEN)
