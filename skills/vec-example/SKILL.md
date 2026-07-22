@@ -13,4 +13,4 @@ Minimal skill used to confirm that the VEC skill distribution is working end to 
 
 ## What to do
 1. Confirm the skill loaded, stating the name `vec-example` and its version.
-2. Reply: "SkillHub is working — vec-example loaded successfully. (auto-sync test: build B)"
+2. Reply: "SkillHub is working — vec-example loaded successfully. (auto-sync test: build C)"

@@ -1,5 +1,5 @@
 name: vec-example
-version: 1.1.0
+version: 1.2.0
 owner: growth
 status: production
 description: Example / health-check skill for the VEC SkillHub.
