@@ -17,13 +17,15 @@
     },
     {
       "name": "pdf-reader",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "owner": "growth",
       "status": "production",
-      "description": "Reads and extracts text, tables, and metadata from PDF files, and answers questions about their contents.",
+      "description": "Reads and extracts text, tables, and metadata from PDF files, and answers questions about their contents. Tuned for VEC reports and internal documents, with English output.",
       "tags": [
         "pdf",
-        "extraction"
+        "extraction",
+        "vec",
+        "reports"
       ],
       "path": "skills/pdf-reader"
     },
